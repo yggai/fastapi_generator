@@ -6,7 +6,7 @@
 A FastAPI project code generation tool that makes FastAPI development simpler, faster, and more standardized.
 
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-Personal-red)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
 
 ## 📖 Project Introduction
@@ -177,21 +177,15 @@ ruff check src tests
 - ⏸️ Batch operations
 - ⏸️ Cloud-native deployment
 
-## 🤝 Contribution Guidelines
+## 🤝 Project Status
 
-We welcome community contributions! If you want to contribute to the project, please follow these steps:
-
-1. Fork this project
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-Please ensure you follow our code style guidelines and commit message conventions.
+This is a personal project maintained by yggai. External code contributions are not accepted. If you have suggestions or find issues, please submit them through GitHub Issues.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under a personal license - see the [LICENSE](LICENSE) file for details.
+
+**Important**: Commercial use requires explicit authorization from the author. Please contact via email: pygosuperman@outlook.com for commercial licensing.
 
 ## 📞 Support and Contact
 

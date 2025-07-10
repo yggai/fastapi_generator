@@ -6,7 +6,7 @@
 FastAPI项目代码生成工具，让FastAPI开发更简单、更快速、更规范。
 
 ![版本](https://img.shields.io/badge/版本-0.1.0-blue)
-![许可证](https://img.shields.io/badge/许可证-MIT-green)
+![许可证](https://img.shields.io/badge/许可证-个人-red)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
 
 ## 📖 项目简介
@@ -177,21 +177,15 @@ ruff check src tests
 - ⏸️ 批量操作
 - ⏸️ 云原生部署
 
-## 🤝 贡献指南
+## 🤝 项目状态
 
-我们欢迎社区贡献！如果您想为项目做出贡献，请遵循以下步骤：
-
-1. Fork本项目
-2. 创建您的特性分支 (`git checkout -b feature/amazing-feature`)
-3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 开启一个Pull Request
-
-请确保遵循我们的代码风格指南和提交消息规范。
+这是由yggai维护的个人项目，不接受外部代码贡献。如果您有建议或发现问题，请通过GitHub Issues提交。
 
 ## 📄 许可证
 
-本项目采用MIT许可证 - 查看[LICENSE](LICENSE)文件了解详情
+本项目采用个人许可证 - 查看[LICENSE](LICENSE)文件了解详情
+
+**重要**: 商业用途需要获得作者的明确授权。请通过邮箱联系获取商业许可：pygosuperman@outlook.com
 
 ## 📞 支持与联系
 
