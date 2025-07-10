@@ -193,6 +193,22 @@ ruff check src tests
 - 🐛 问题反馈: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
 - 📖 文档: [项目文档](docs/)
 
+## 💼 商业合作
+
+如需商业使用授权、咨询或定制开发，请联系作者：
+
+- 📱 电话: 18010070052
+- 💬 微信: 公众号"源溪溪AI编程"（四川 成都）
+- 🧑‍🏫 服务内容:
+  - 一对一私教课培训
+  - 企业项目定制开发
+  - 技术咨询与解决方案
+
+<!-- 
+请将微信二维码图片保存为assets/vx.jpg，并取消下面注释
+![微信二维码](assets/vx.jpg)
+-->
+
 ---
 
 **让FastAPI开发更简单、更快速、更规范！** 🚀 

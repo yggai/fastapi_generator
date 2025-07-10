@@ -193,6 +193,22 @@ This project is licensed under a personal license - see the [LICENSE](LICENSE) f
 - 🐛 Issue Reporting: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
 - 📖 Documentation: [Project Documentation](docs/)
 
+## 💼 Business Cooperation
+
+For commercial use, consulting, or custom development needs, please contact the author:
+
+- 📱 Phone: +86 18010070052
+- 💬 WeChat: Scan the QR code with the following information: "源溪溪AI编程" from "四川 成都"
+- 🧑‍🏫 Services:
+  - One-on-one private tutoring and training
+  - Enterprise project custom development
+  - Technical consulting and solutions
+
+<!-- 
+请将微信二维码图片保存为assets/vx.jpg，并取消下面注释
+![WeChat QR Code](assets/vx.jpg)
+-->
+
 ---
 
 **Making FastAPI development simpler, faster, and more standardized!** 🚀 
