@@ -100,11 +100,24 @@ pytest
 
 如果您觉得这个项目有帮助，请考虑支持它的开发：
 
-<img src="wxzf.jpg" alt="微信支付二维码" width="300"/>
+<img src="https://github.com/yggai/fastapi_generator/blob/main/assets/wxzf.jpg" alt="微信支付二维码" width="300"/>
 
 *微信支付二维码：源滚滚AI编程*
 
 您的支持将帮助维护这个项目并开发新功能！
+
+## 商业合作
+
+如需商业授权、咨询或定制开发，请联系作者：
+
+- 服务内容:
+  - 一对一私教课培训
+  - 企业项目定制开发
+  - 技术咨询与解决方案
+
+微信联系方式:
+
+<img src="https://github.com/yggai/fastapi_generator/blob/main/assets/vx.jpg" alt="微信二维码" width="300"/>
 
 ## 许可证
 

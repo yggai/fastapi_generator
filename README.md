@@ -100,11 +100,24 @@ pytest
 
 If you find this project helpful, please consider supporting its development:
 
-<img src="wxzf.jpg" alt="WeChat Payment QR Code" width="300"/>
+<img src="https://github.com/yggai/fastapi_generator/blob/main/assets/wxzf.jpg" alt="WeChat Payment QR Code" width="300"/>
 
 *WeChat payment QR code: 源滚滚AI编程*
 
 Your support helps maintain this project and develop new features!
+
+## Business Cooperation
+
+For commercial licensing, consulting, or custom development, please contact the author:
+
+- Services offered:
+  - One-on-one training
+  - Enterprise project customization
+  - Technical consulting and solutions
+
+Contact via WeChat:
+
+<img src="https://github.com/yggai/fastapi_generator/blob/main/assets/vx.jpg" alt="WeChat QR Code" width="300"/>
 
 ## License
 
