@@ -2,6 +2,14 @@
 
 FastAPI项目代码生成工具，让FastAPI开发更简单、更快速、更规范。
 
+![版本](https://img.shields.io/badge/版本-0.1.0-blue)
+![许可证](https://img.shields.io/badge/许可证-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
+
+## 📖 项目简介
+
+FastAPI Generator是一款专为FastAPI框架设计的代码生成工具，旨在简化FastAPI项目的创建和开发流程。通过提供标准化的项目结构、模板和代码生成功能，帮助开发者快速搭建高质量的FastAPI应用。
+
 ## 🚀 快速开始
 
 ### 安装
@@ -138,13 +146,6 @@ ruff check src tests
 4. 添加相应的CLI命令
 5. 编写测试用例
 
-### 贡献指南
-
-1. Fork项目
-2. 创建功能分支
-3. 提交更改
-4. 创建Pull Request
-
 ## 📊 性能指标
 
 - **项目创建时间**: < 30秒
@@ -173,15 +174,23 @@ ruff check src tests
 - ⏸️ 批量操作
 - ⏸️ 云原生部署
 
+## 🤝 贡献指南
+
+我们欢迎社区贡献！如果您想为项目做出贡献，请遵循以下步骤：
+
+1. Fork本项目
+2. 创建您的特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 开启一个Pull Request
+
+请确保遵循我们的代码风格指南和提交消息规范。
+
 ## 📄 许可证
 
-MIT License
+本项目采用MIT许可证 - 查看[LICENSE](LICENSE)文件了解详情
 
-## 🤝 贡献
-
-欢迎贡献代码！请查看[贡献指南](CONTRIBUTING.md)了解详情。
-
-## 📞 支持
+## 📞 支持与联系
 
 - 📧 邮箱: generator@example.com
 - 🐛 问题反馈: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
