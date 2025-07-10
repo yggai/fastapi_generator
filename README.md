@@ -204,10 +204,9 @@ For commercial use, consulting, or custom development needs, please contact the 
   - Enterprise project custom development
   - Technical consulting and solutions
 
-<!-- 
-请将微信二维码图片保存为assets/vx.jpg，并取消下面注释
-![WeChat QR Code](assets/vx.jpg)
--->
+WeChat Official Account:
+
+![WeChat QR Code](https://raw.githubusercontent.com/yggai/fastapi_generator/main/assets/vx.jpg)
 
 ---
 

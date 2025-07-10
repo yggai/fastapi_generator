@@ -204,10 +204,9 @@ ruff check src tests
   - 企业项目定制开发
   - 技术咨询与解决方案
 
-<!-- 
-请将微信二维码图片保存为assets/vx.jpg，并取消下面注释
-![微信二维码](assets/vx.jpg)
--->
+微信公众号:
+
+![微信二维码](https://raw.githubusercontent.com/yggai/fastapi_generator/main/assets/vx.jpg)
 
 ---
 
