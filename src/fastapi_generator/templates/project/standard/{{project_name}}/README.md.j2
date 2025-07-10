@@ -1,0 +1,86 @@
+# {{ display_name }}
+
+基于FastAPI和SQLModel的API服务。
+
+## 功能特点
+
+- 基于FastAPI的高性能API
+- 使用SQLModel进行ORM操作
+- 完整的API文档（Swagger UI）
+- 模块化的项目结构
+- 类型提示和验证
+
+## 安装
+
+```bash
+# 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# 或
+venv\Scripts\activate  # Windows
+
+# 安装依赖
+pip install -r requirements.txt
+```
+
+## 运行
+
+```bash
+# 开发模式运行
+uvicorn main:app --reload
+
+# 或者直接运行main.py
+python main.py
+```
+
+访问API文档：http://127.0.0.1:8000/docs
+
+## 项目结构
+
+```
+{{ project_name }}/
+│
+├── app/                    # 应用代码
+│   ├── api/                # API定义
+│   │   └── api_v1/         # API v1版本
+│   │       ├── endpoints/  # API端点
+│   │       └── api.py      # API路由聚合
+│   │
+│   ├── core/               # 核心功能
+│   │   └── config.py       # 配置管理
+│   │
+│   ├── db/                 # 数据库
+│   │   └── session.py      # 数据库会话
+│   │
+│   ├── models/             # 数据模型
+│   └── schemas/            # 数据验证模式
+│
+├── tests/                  # 测试
+├── .env                    # 环境变量（需要创建）
+├── .gitignore              # Git忽略文件
+├── main.py                 # 应用入口
+└── requirements.txt        # 依赖包
+```
+
+## 开发指南
+
+### 添加新的API端点
+
+1. 在`app/api/api_v1/endpoints/`目录下创建新的路由文件
+2. 在`app/api/api_v1/api.py`中注册新的路由
+
+### 添加新的数据模型
+
+1. 在`app/models/`目录下创建新的模型文件
+2. 在`app/schemas/`目录下创建对应的验证模式
+
+## 测试
+
+```bash
+# 运行测试
+pytest
+```
+
+## 许可证
+
+[MIT](LICENSE) 

@@ -19,7 +19,7 @@ FastAPI Generator是一款专为FastAPI框架设计的代码生成工具，旨�
 
 ```bash
 # 从源码安装
-git clone https://github.com/your-username/fastapi-generator.git
+git clone https://github.com/yggai/fastapi-generator.git
 cd fastapi-generator
 pip install -e .
 
@@ -127,7 +127,7 @@ fastapi_generator/
 
 ```bash
 # 克隆项目
-git clone https://github.com/your-username/fastapi-generator.git
+git clone https://github.com/yggai/fastapi-generator.git
 cd fastapi-generator
 
 # 安装开发依赖
@@ -190,7 +190,7 @@ ruff check src tests
 ## 📞 支持与联系
 
 - 📧 邮箱: generator@example.com
-- 🐛 问题反馈: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
+- 🐛 问题反馈: [GitHub Issues](https://github.com/yggai/fastapi-generator/issues)
 - 📖 文档: [项目文档](docs/)
 
 ## 💼 商业合作

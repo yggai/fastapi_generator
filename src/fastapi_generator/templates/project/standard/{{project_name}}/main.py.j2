@@ -1,0 +1,52 @@
+"""
+{{ display_name }} - FastAPI应用入口
+"""
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_swagger_ui_html
+
+from app.core.config import settings
+from app.api.api_v1.api import api_router
+
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    description=settings.PROJECT_DESCRIPTION,
+    version=settings.VERSION,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url=None,
+    redoc_url=None,
+)
+
+# 设置CORS
+if settings.BACKEND_CORS_ORIGINS:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+# 包含API路由
+app.include_router(api_router, prefix=settings.API_V1_STR)
+
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    """自定义Swagger UI"""
+    return get_swagger_ui_html(
+        openapi_url=f"{settings.API_V1_STR}/openapi.json",
+        title=f"{settings.PROJECT_NAME} - API文档",
+        swagger_js_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.9.0/swagger-ui-bundle.js",
+        swagger_css_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.9.0/swagger-ui.css",
+    )
+
+@app.get("/", tags=["健康检查"])
+async def root():
+    """
+    健康检查接口
+    """
+    return {"status": "ok", "message": "{{ display_name }} 服务运行正常"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True) 

@@ -16,7 +16,7 @@ FastAPI Generator is a code generation tool designed specifically for the FastAP
 
 ```bash
 # Install from source code
-git clone https://github.com/your-username/fastapi-generator.git
+git clone https://github.com/yggai/fastapi-generator.git
 cd fastapi-generator
 pip install -e .
 
@@ -124,7 +124,7 @@ fastapi_generator/
 
 ```bash
 # Clone the project
-git clone https://github.com/your-username/fastapi-generator.git
+git clone https://github.com/yggai/fastapi-generator.git
 cd fastapi-generator
 
 # Install development dependencies
@@ -193,7 +193,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support and Contact
 
 - 📧 Email: generator@example.com
-- 🐛 Issue Reporting: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
+- 🐛 Issue Reporting: [GitHub Issues](https://github.com/yggai/fastapi-generator/issues)
 - 📖 Documentation: [Project Documentation](docs/)
 
 ---
