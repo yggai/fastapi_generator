@@ -27,6 +27,8 @@ class Settings(BaseSettings):
 
     # 数据库配置
     DATABASE_URL: str = "sqlite:///./{{ project_name }}.db"
+    DB_ECHO: bool = False  # 是否显示SQL语句
+    DB_CONNECT_ARGS: dict = {"check_same_thread": False}  # 仅用于SQLite
     
     # 安全配置
     SECRET_KEY: str = "{{ project_name }}_secret_key_change_this_in_production"

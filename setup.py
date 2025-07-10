@@ -40,6 +40,7 @@ setup(
         "pydantic>=2.0.0",
         "click>=8.1.3",
         "rich>=13.5.0",
+        "alembic>=1.12.0",
     ],
     entry_points={
         "console_scripts": [
@@ -58,5 +59,5 @@ setup(
         "Topic :: Software Development :: Code Generators",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
-    keywords="fastapi, generator, code generator, api, rest, sqlmodel",
+    keywords="fastapi, generator, code generator, api, rest, sqlmodel, alembic, migration",
 ) 

@@ -8,6 +8,7 @@
 - 生成API端点（CRUD操作）
 - 生成数据模型（使用SQLModel）
 - 生成服务层代码
+- 数据库迁移（使用Alembic）
 - 模块化和可扩展的设计
 
 ## 安装
@@ -50,6 +51,16 @@ fg generate model user
 ```bash
 # 生成用户服务
 fg generate service user
+```
+
+### 数据库迁移
+
+```bash
+# 初始化数据库迁移
+fg init-migration
+
+# 生成迁移配置
+fg generate migration initial
 ```
 
 ## 项目结构

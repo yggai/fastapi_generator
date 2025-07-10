@@ -62,14 +62,14 @@ def create_project(
 
 @app.command("generate")
 def generate_component(
-    component_type: str = typer.Argument(..., help="组件类型: api, model, service"),
+    component_type: str = typer.Argument(..., help="组件类型: api, model, service, migration"),
     name: str = typer.Argument(..., help="组件名称"),
     output_dir: Optional[Path] = typer.Option(
         None, "--output", "-o", help="输出目录，默认为当前目录下对应的模块目录"
     ),
 ):
     """
-    生成项目组件(API、模型、服务等)
+    生成项目组件(API、模型、服务、数据库迁移等)
     """
     console.print(f"[bold green]生成{component_type}: {name}[/bold green]")
     
@@ -83,12 +83,37 @@ def generate_component(
         elif component_type == "service":
             from fastapi_generator.generators.service_generator import generate_service
             generate_service(name=name, output_dir=output_dir)
+        elif component_type == "migration":
+            from fastapi_generator.generators.migration_generator import generate_migration
+            generate_migration(output_dir=output_dir)
+            console.print(f"[bold green]✓ 数据库迁移配置生成成功![/bold green]")
+            return
         else:
             console.print(f"[bold red]错误: 未知的组件类型 '{component_type}'[/bold red]")
-            console.print("可用的组件类型: api, model, service")
+            console.print("可用的组件类型: api, model, service, migration")
             raise typer.Exit(code=1)
             
         console.print(f"[bold green]✓ {component_type}生成成功![/bold green]")
+    except Exception as e:
+        console.print(f"[bold red]错误: {str(e)}[/bold red]")
+        raise typer.Exit(code=1)
+
+@app.command("init-migration")
+def init_migration(
+    output_dir: Optional[Path] = typer.Option(
+        None, "--output", "-o", help="输出目录，默认为当前项目根目录"
+    ),
+):
+    """
+    初始化数据库迁移配置
+    """
+    from fastapi_generator.generators.migration_generator import generate_migration
+    
+    console.print("[bold green]初始化数据库迁移配置[/bold green]")
+    
+    try:
+        migrations_dir = generate_migration(output_dir=output_dir)
+        console.print(f"[bold green]✓ 数据库迁移配置初始化成功![/bold green] 路径: {migrations_dir}")
     except Exception as e:
         console.print(f"[bold red]错误: {str(e)}[/bold red]")
         raise typer.Exit(code=1)

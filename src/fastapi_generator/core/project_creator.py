@@ -81,6 +81,11 @@ def create_project(
     try:
         # 创建项目结构
         _create_project_structure(templates_dir, project_dir, context)
+        
+        # 创建迁移配置（仅对standard和enterprise模板）
+        if template in ["standard", "enterprise"]:
+            _setup_migration(project_dir, context)
+        
         return project_dir
     except Exception as e:
         # 如果出现错误，清理创建的目录
@@ -88,6 +93,25 @@ def create_project(
             shutil.rmtree(project_dir, ignore_errors=True)
         print(f"创建项目失败: {str(e)}")
         raise
+
+def _setup_migration(project_dir: Path, context: Dict[str, Any]) -> None:
+    """
+    设置数据库迁移配置
+    
+    Args:
+        project_dir: 项目目录
+        context: 模板渲染上下文
+    """
+    try:
+        # 导入迁移生成器
+        from fastapi_generator.generators.migration_generator import generate_migration
+        
+        # 生成迁移配置
+        generate_migration(output_dir=project_dir)
+    except ImportError:
+        print("警告: 无法导入迁移生成器，跳过迁移配置")
+    except Exception as e:
+        print(f"警告: 创建迁移配置失败: {str(e)}")
 
 def _create_project_structure(
     template_dir: Path, 

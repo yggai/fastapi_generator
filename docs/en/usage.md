@@ -93,6 +93,41 @@ This will generate user-related service layer code.
 fg generate service user --output /path/to/directory
 ```
 
+## Database Migrations
+
+### Initialize Database Migration
+
+```bash
+fg init-migration
+```
+
+This will initialize the database migration configuration using Alembic.
+
+### Generate Migration Files
+
+```bash
+fg generate migration initial
+```
+
+This will generate the initial migration configuration for your project.
+
+### Working with Migrations
+
+After the migration configuration is set up, you can use Alembic commands directly:
+
+```bash
+# Create a new migration (auto-detect changes)
+alembic revision --autogenerate -m "Add user table"
+
+# Apply migrations
+alembic upgrade head
+
+# Revert migrations
+alembic downgrade -1
+```
+
+For more details, see the README.md file in the migrations directory of your project.
+
 ## Examples
 
 ### Create a Complete User Management System
@@ -153,6 +188,7 @@ from fastapi_generator.core.project_creator import create_project
 from fastapi_generator.generators.model_generator import generate_model
 from fastapi_generator.generators.api_generator import generate_api
 from fastapi_generator.generators.service_generator import generate_service
+from fastapi_generator.generators.migration_generator import generate_migration
 
 # Create project
 project_dir = create_project("my-project", template="standard")
@@ -165,6 +201,9 @@ generate_api("user", output_dir=project_dir / "app" / "api" / "api_v1" / "endpoi
 
 # Generate service
 generate_service("user", output_dir=project_dir / "app" / "services")
+
+# Generate database migration configuration
+generate_migration(output_dir=project_dir)
 ```
 
 For more examples, see the `examples` directory. 

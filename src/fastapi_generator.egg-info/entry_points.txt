@@ -1,2 +1,0 @@
-[console_scripts]
-fg = fastapi_generator.cli.main:app

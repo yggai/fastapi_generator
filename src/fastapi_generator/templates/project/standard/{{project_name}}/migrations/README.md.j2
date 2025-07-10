@@ -1,0 +1,47 @@
+# 数据库迁移说明
+
+本项目使用Alembic进行数据库迁移管理。
+
+## 常用命令
+
+### 创建迁移
+
+```bash
+# 自动生成迁移脚本
+alembic revision --autogenerate -m "描述迁移的内容"
+
+# 手动创建空白迁移脚本
+alembic revision -m "描述迁移的内容"
+```
+
+### 应用迁移
+
+```bash
+# 升级到最新版本
+alembic upgrade head
+
+# 升级指定版本
+alembic upgrade <revision>
+
+# 升级指定步数
+alembic upgrade +2
+
+# 降级到上一个版本
+alembic downgrade -1
+
+# 降级到基础版本
+alembic downgrade base
+```
+
+### 查看迁移信息
+
+```bash
+# 查看当前版本
+alembic current
+
+# 查看历史版本
+alembic history
+
+# 查看特定版本详情
+alembic show <revision>
+``` 
