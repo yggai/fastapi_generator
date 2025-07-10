@@ -1,0 +1,2 @@
+# fastapi_generator
+FastAPI企业级通用脚手架，快速生成规范的安全的FastAPI项目和代码片段
