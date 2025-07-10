@@ -198,7 +198,7 @@ This project is licensed under a personal license - see the [LICENSE](LICENSE) f
 For commercial use, consulting, or custom development needs, please contact the author:
 
 - 📱 Phone: +86 18010070052
-- 💬 WeChat: Scan the QR code with the following information: "源溪溪AI编程" from "四川 成都"
+- 💬 WeChat: Scan the QR code below
 - 🧑‍🏫 Services:
   - One-on-one private tutoring and training
   - Enterprise project custom development
