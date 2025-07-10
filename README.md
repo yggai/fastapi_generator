@@ -1,192 +1,204 @@
 # FastAPI Generator
 
-FastAPI项目代码生成工具，让FastAPI开发更简单、更快速、更规范。
+[![EN](https://img.shields.io/badge/Language-English-blue)](README.md)
+[![中文](https://img.shields.io/badge/语言-中文-red)](README_CN.md)
 
-## 🚀 快速开始
+A FastAPI project code generation tool that makes FastAPI development simpler, faster, and more standardized.
 
-### 安装
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.8%2B-yellow)
+
+## 📖 Project Introduction
+
+FastAPI Generator is a code generation tool designed specifically for the FastAPI framework, aiming to simplify the creation and development process of FastAPI projects. By providing standardized project structures, templates, and code generation features, it helps developers quickly build high-quality FastAPI applications.
+
+## 🚀 Quick Start
+
+### Installation
 
 ```bash
-# 从源码安装
+# Install from source code
 git clone https://github.com/your-username/fastapi-generator.git
 cd fastapi-generator
 pip install -e .
 
-# 或者直接安装
+# Or install directly
 pip install fastapi-generator
 ```
 
-### 使用
+### Usage
 
 ```bash
-# 创建新项目
+# Create a new project
 fg create my-project
 
-# 使用指定模板
+# Use a specific template
 fg create my-project --template standard
 
-# 生成模块
+# Generate a module
 fg generate module user-management
 
-# 生成API接口
+# Generate API endpoints
 fg generate api user --methods crud
 
-# 运行项目
+# Run the project
 fg run
 
-# 查看帮助
+# View help
 fg --help
 ```
 
-## 📋 功能特性
+## 📋 Features
 
-### 项目创建
-- ✅ 标准FastAPI项目结构
-- 🔄 微服务项目模板
-- 🔄 API网关模板
-- 🔄 单体应用模板
-- 🔄 前后端分离模板
+### Project Creation
+- ✅ Standard FastAPI project structure
+- 🔄 Microservice project templates
+- 🔄 API gateway templates
+- 🔄 Monolithic application templates
+- 🔄 Frontend-backend separation templates
 
-### 代码生成
-- 🔄 模块生成器
-- 🔄 API接口生成器
-- 🔄 数据模型生成器
-- 🔄 服务层生成器
-- 🔄 测试代码生成器
+### Code Generation
+- 🔄 Module generator
+- 🔄 API endpoint generator
+- 🔄 Data model generator
+- 🔄 Service layer generator
+- 🔄 Test code generator
 
-### 开发工具
-- ✅ 项目验证
-- ✅ 依赖管理
-- ✅ 代码格式化
-- ✅ 项目清理
-- 🔄 自动化测试
+### Development Tools
+- ✅ Project validation
+- ✅ Dependency management
+- ✅ Code formatting
+- ✅ Project cleanup
+- 🔄 Automated testing
 
-## 🎯 用户故事
+## 🎯 User Stories
 
-### 快速创建新项目
-**作为** Python开发者  
-**我希望** 能够快速创建一个新的FastAPI项目  
-**以便** 立即开始业务逻辑开发
+### Quick Project Creation
+**As a** Python developer  
+**I want** to quickly create a new FastAPI project  
+**So that** I can immediately start developing business logic
 
 ```bash
 fg create my-api --template standard
-# 5分钟内完成项目创建，节省95%时间
+# Complete project creation in 5 minutes, saving 95% time
 ```
 
-### 生成业务模块
-**作为** 业务开发者  
-**我希望** 能够快速生成常用的业务模块  
-**以便** 专注于业务逻辑实现
+### Generate Business Modules
+**As a** business developer  
+**I want** to quickly generate common business modules  
+**So that** I can focus on implementing business logic
 
 ```bash
 fg generate module user-management
-# 1小时内完成模块开发，节省87%时间
+# Complete module development in 1 hour, saving 87% time
 ```
 
-### 生成API接口
-**作为** API开发者  
-**我希望** 能够快速生成RESTful API接口  
-**以便** 快速构建API服务
+### Generate API Endpoints
+**As an** API developer  
+**I want** to quickly generate RESTful API endpoints  
+**So that** I can quickly build API services
 
 ```bash
 fg generate api user --methods crud
-# 30分钟内完成API开发，节省87%时间
+# Complete API development in 30 minutes, saving 87% time
 ```
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 fastapi_generator/
-├── src/fastapi_generator/     # 源代码
-│   ├── cli/                   # 命令行接口
-│   ├── core/                  # 核心引擎
-│   ├── generators/            # 代码生成器
-│   ├── templates/             # 模板系统
-│   ├── file_system/           # 文件系统
-│   └── utils/                 # 工具函数
-├── tests/                     # 测试文件
-├── examples/                  # 使用示例
-├── docs/                      # 文档
-└── scripts/                   # 脚本文件
+├── src/fastapi_generator/     # Source code
+│   ├── cli/                   # Command line interface
+│   ├── core/                  # Core engine
+│   ├── generators/            # Code generators
+│   ├── templates/             # Template system
+│   ├── file_system/           # File system
+│   └── utils/                 # Utility functions
+├── tests/                     # Test files
+├── examples/                  # Usage examples
+├── docs/                      # Documentation
+└── scripts/                   # Script files
 ```
 
-## 🛠️ 开发指南
+## 🛠️ Development Guide
 
-### 环境设置
+### Environment Setup
 
 ```bash
-# 克隆项目
+# Clone the project
 git clone https://github.com/your-username/fastapi-generator.git
 cd fastapi-generator
 
-# 安装开发依赖
+# Install development dependencies
 pip install -e ".[dev]"
 
-# 运行测试
+# Run tests
 pytest
 
-# 代码格式化
+# Format code
 black src tests
 ruff check src tests
 ```
 
-### 添加新功能
+### Adding New Features
 
-1. 在`src/fastapi_generator/generators/`下创建新的生成器
-2. 继承`BaseGenerator`类
-3. 实现`generate()`和`validate_context()`方法
-4. 添加相应的CLI命令
-5. 编写测试用例
+1. Create a new generator under `src/fastapi_generator/generators/`
+2. Inherit from the `BaseGenerator` class
+3. Implement the `generate()` and `validate_context()` methods
+4. Add corresponding CLI commands
+5. Write test cases
 
-### 贡献指南
+## 📊 Performance Metrics
 
-1. Fork项目
-2. 创建功能分支
-3. 提交更改
-4. 创建Pull Request
+- **Project Creation Time**: < 30 seconds
+- **Module Generation Time**: < 1 minute
+- **API Generation Time**: < 30 seconds
+- **Memory Usage**: < 100MB
+- **Startup Time**: < 3 seconds
 
-## 📊 性能指标
+## 🎯 Development Plan
 
-- **项目创建时间**: < 30秒
-- **模块生成时间**: < 1分钟
-- **API生成时间**: < 30秒
-- **内存使用**: < 100MB
-- **启动时间**: < 3秒
+### Phase One (Completed)
+- ✅ Project initialization functionality
+- ✅ Standard project templates
+- ✅ Basic CLI commands
+- ✅ File system management
 
-## 🎯 开发计划
+### Phase Two (In Progress)
+- 🔄 Module generator
+- 🔄 API endpoint generator
+- 🔄 Data model generator
+- 🔄 Template system
 
-### 第一阶段（已完成）
-- ✅ 项目初始化功能
-- ✅ 标准项目模板
-- ✅ 基础CLI命令
-- ✅ 文件系统管理
+### Phase Three (Planned)
+- ⏸️ Plugin system
+- ⏸️ Advanced templates
+- ⏸️ Batch operations
+- ⏸️ Cloud-native deployment
 
-### 第二阶段（进行中）
-- 🔄 模块生成器
-- 🔄 API接口生成器
-- 🔄 数据模型生成器
-- 🔄 模板系统
+## 🤝 Contribution Guidelines
 
-### 第三阶段（计划中）
-- ⏸️ 插件系统
-- ⏸️ 高级模板
-- ⏸️ 批量操作
-- ⏸️ 云原生部署
+We welcome community contributions! If you want to contribute to the project, please follow these steps:
 
-## 📄 许可证
+1. Fork this project
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-MIT License
+Please ensure you follow our code style guidelines and commit message conventions.
 
-## 🤝 贡献
+## 📄 License
 
-欢迎贡献代码！请查看[贡献指南](CONTRIBUTING.md)了解详情。
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 支持
+## 📞 Support and Contact
 
-- 📧 邮箱: generator@example.com
-- 🐛 问题反馈: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
-- 📖 文档: [项目文档](docs/)
+- 📧 Email: generator@example.com
+- 🐛 Issue Reporting: [GitHub Issues](https://github.com/your-username/fastapi-generator/issues)
+- 📖 Documentation: [Project Documentation](docs/)
 
 ---
 
-**让FastAPI开发更简单、更快速、更规范！** 🚀 
+**Making FastAPI development simpler, faster, and more standardized!** 🚀 

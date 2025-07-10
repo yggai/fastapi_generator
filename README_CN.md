@@ -1,5 +1,8 @@
 # FastAPI Generator
 
+[![EN](https://img.shields.io/badge/Language-English-blue)](README.md)
+[![中文](https://img.shields.io/badge/语言-中文-red)](README_CN.md)
+
 FastAPI项目代码生成工具，让FastAPI开发更简单、更快速、更规范。
 
 ![版本](https://img.shields.io/badge/版本-0.1.0-blue)
