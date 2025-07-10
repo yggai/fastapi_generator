@@ -1,98 +1,115 @@
 # FastAPI Generator
 
-一个用于快速生成FastAPI项目和组件的命令行工具。
+[![EN](https://img.shields.io/badge/Language-English-blue)](README.md)
+[![中文](https://img.shields.io/badge/语言-中文-red)](README_CN.md)
 
-## 功能特点
+A command-line tool for quickly generating FastAPI projects and components.
 
-- 创建标准FastAPI项目结构
-- 生成API端点（CRUD操作）
-- 生成数据模型（使用SQLModel）
-- 生成服务层代码
-- 数据库迁移（使用Alembic）
-- 模块化和可扩展的设计
+## Features
 
-## 安装
+- Create standard FastAPI project structures
+- Generate API endpoints (CRUD operations)
+- Generate data models (using SQLModel)
+- Generate service layer code
+- Database migrations (using Alembic)
+- Modular and extensible design
+
+## Installation
 
 ```bash
-# 从源码安装
+# Install from source
 git clone https://github.com/yggai/fastapi_generator.git
 cd fastapi_generator
 pip install -e .
 ```
 
-## 使用方法
+## Usage
 
-### 创建新项目
+### Create a New Project
 
 ```bash
-# 创建一个名为"my-project"的新项目
+# Create a new project named "my-project"
 fg create my-project
 
-# 使用特定模板创建项目
+# Create a project with a specific template
 fg create my-project --template enterprise
 ```
 
-### 生成API
+### Generate API
 
 ```bash
-# 生成用户API
+# Generate user API
 fg generate api user
 ```
 
-### 生成数据模型
+### Generate Data Model
 
 ```bash
-# 生成用户模型
+# Generate user model
 fg generate model user
 ```
 
-### 生成服务
+### Generate Service
 
 ```bash
-# 生成用户服务
+# Generate user service
 fg generate service user
 ```
 
-### 数据库迁移
+### Database Migrations
 
 ```bash
-# 初始化数据库迁移
+# Initialize database migration
 fg init-migration
 
-# 生成迁移配置
+# Generate migration configuration
 fg generate migration initial
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 fastapi_generator/
 ├── src/
 │   └── fastapi_generator/
-│       ├── cli/                # 命令行接口
-│       ├── core/               # 核心功能
-│       ├── generators/         # 代码生成器
-│       ├── templates/          # 项目模板
-│       └── utils/              # 工具函数
-├── tests/                      # 测试
-├── setup.py                    # 安装配置
-└── pyproject.toml              # 项目配置
+│       ├── cli/                # Command-line interface
+│       ├── core/               # Core functionality
+│       ├── generators/         # Code generators
+│       ├── templates/          # Project templates
+│       └── utils/              # Utility functions
+├── tests/                      # Tests
+├── setup.py                    # Installation configuration
+└── pyproject.toml              # Project configuration
 ```
 
-## 开发
+## Development
 
-### 安装开发依赖
+### Install Development Dependencies
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-### 运行测试
+### Run Tests
 
 ```bash
 pytest
 ```
 
-## 许可证
+## Support the Project
 
-MIT 
+If you find this project helpful, please consider supporting its development:
+
+<img src="wxzf.jpg" alt="WeChat Payment QR Code" width="300"/>
+
+*WeChat payment QR code: 源滚滚AI编程*
+
+Your support helps maintain this project and develop new features!
+
+## License
+
+This project is under a personal license. For personal use (learning, research, and private projects), you are free to use this software. However, any commercial use requires explicit authorization from the author.
+
+For commercial licensing, please contact: pygosuperman@outlook.com
+
+See [LICENSE](LICENSE) for details. 
