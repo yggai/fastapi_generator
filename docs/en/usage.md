@@ -98,7 +98,7 @@ fg generate service user --output /path/to/directory
 ### Initialize Database Migration
 
 ```bash
-fg init-migration
+fg generate migration init
 ```
 
 This will initialize the database migration configuration using Alembic.
