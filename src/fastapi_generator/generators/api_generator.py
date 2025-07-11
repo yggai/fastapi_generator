@@ -60,7 +60,7 @@ def create_{model_name}(
     \"""
     创建新的{model_display_name}
     \"""
-    {model_name} = {model_class}(**{model_name}_data.model_dump())
+    {model_name} = {model_class}(**{model_name}_data.dict())
     session.add({model_name})
     session.commit()
     session.refresh({model_name})
@@ -83,8 +83,8 @@ def update_{model_name}(
             detail=f"{model_display_name} ID {{{model_name}_id}} 不存在"
         )
     
-    # 更新模型数据
-    {model_name}_data_dict = {model_name}_data.model_dump(exclude_unset=True)
+    # 更新模型字段
+    {model_name}_data_dict = {model_name}_data.dict(exclude_unset=True)
     for key, value in {model_name}_data_dict.items():
         setattr({model_name}, key, value)
     
@@ -137,10 +137,22 @@ def generate_api(name: str, output_dir: Optional[Path] = None) -> Path:
         project_root = find_project_root()
         if project_root:
             # 假设标准项目结构
-            output_dir = project_root / "app" / "api" / "api_v1" / "endpoints"
+            app_dir = project_root / "app"
+            output_dir = app_dir / "api" / "api_v1" / "endpoints"
         else:
-            # 如果找不到项目根目录，使用当前目录
-            output_dir = Path.cwd() / "app" / "api" / "api_v1" / "endpoints"
+            # 如果找不到项目根目录，使用当前目录下的app目录
+            app_dir = Path.cwd() / "app"
+            output_dir = app_dir / "api" / "api_v1" / "endpoints"
+    else:
+        # 如果提供了输出目录，检查是否有app目录
+        if (output_dir / "app").exists() and (output_dir / "app").is_dir():
+            # 如果存在app目录，使用app下的api目录
+            app_dir = output_dir / "app"
+            output_dir = app_dir / "api" / "api_v1" / "endpoints"
+        else:
+            # 否则，假设output_dir已经是app目录或直接在output_dir下创建api目录
+            app_dir = output_dir
+            output_dir = app_dir / "api" / "api_v1" / "endpoints"
     
     # 确保输出目录存在
     ensure_dir_exists(output_dir)
@@ -165,55 +177,52 @@ def generate_api(name: str, output_dir: Optional[Path] = None) -> Path:
     
     return endpoint_file
 
-def _update_api_router(model_name: str, model_name_plural: str, api_dir: Path) -> None:
+def _update_api_router(resource_name: str, resource_name_plural: str, api_dir: Path) -> None:
     """
     更新API路由聚合文件
     
     Args:
-        model_name: 模型名称（蛇形命名法）
-        model_name_plural: 模型复数名称（蛇形命名法）
+        resource_name: 资源名称（蛇形命名法）
+        resource_name_plural: 资源名称复数形式（蛇形命名法）
         api_dir: API目录路径
     """
+    # 确保api.py文件存在
     api_file = api_dir / "api.py"
     
     if not api_file.exists():
-        # 如果API路由聚合文件不存在，创建一个基础文件
+        # 如果api.py不存在，创建一个基础文件
         with open(api_file, "w", encoding="utf-8") as f:
-            f.write('"""API路由聚合"""\n')
-            f.write("from fastapi import APIRouter\n\n")
-            f.write("api_router = APIRouter()\n")
+            f.write("""from fastapi import APIRouter
+
+api_router = APIRouter()
+""")
     
     # 读取现有内容
     with open(api_file, "r", encoding="utf-8") as f:
         content = f.read()
     
-    # 检查是否已经导入了该模块
-    import_pattern = rf"from app.api.api_v1.endpoints import {model_name}"
-    if not re.search(import_pattern, content):
+    # 检查是否已经导入了该路由
+    import_line = f"from .endpoints.{resource_name} import router as {resource_name}_router"
+    if import_line not in content:
+        # 找到导入部分的结束位置
+        import_end = content.rfind("import")
+        import_end = content.find("\n", import_end) if import_end != -1 else 0
+        
         # 添加导入语句
-        import_section_end = content.find("api_router = APIRouter()")
-        if import_section_end == -1:
-            # 如果找不到api_router定义，添加到文件末尾
-            content += f"\nfrom app.api.api_v1.endpoints import {model_name}\n"
-        else:
-            # 在api_router定义前添加导入
-            content = content[:import_section_end] + f"from app.api.api_v1.endpoints import {model_name}\n\n" + content[import_section_end:]
+        new_content = content[:import_end + 1] + "\n" + import_line + content[import_end + 1:]
+        content = new_content
     
-    # 检查是否已经注册了该路由
-    router_pattern = rf"api_router.include_router\({model_name}.router, prefix=\"/{model_name_plural}\""
-    if not re.search(router_pattern, content):
-        # 添加路由注册
-        if "api_router.include_router" in content:
-            # 在最后一个include_router后添加
-            last_include = content.rfind("api_router.include_router")
-            if last_include != -1:
-                # 找到该行的结束位置
-                line_end = content.find("\n", last_include)
-                if line_end != -1:
-                    content = content[:line_end+1] + f"api_router.include_router({model_name}.router, prefix=\"/{model_name_plural}\", tags=[\"{model_name_plural}\"])\n" + content[line_end+1:]
-        else:
-            # 如果没有任何include_router，添加到文件末尾
-            content += f"\napi_router.include_router({model_name}.router, prefix=\"/{model_name_plural}\", tags=[\"{model_name_plural}\"])\n"
+    # 检查是否已经包含了该路由
+    include_line = f"api_router.include_router({resource_name}_router, prefix=\"/{resource_name_plural}\", tags=[\"{resource_name_plural}\"])"
+    if include_line not in content:
+        # 找到路由器定义后的位置
+        router_def = content.find("api_router = APIRouter()")
+        if router_def != -1:
+            router_end = content.find("\n", router_def)
+            if router_end != -1:
+                # 添加包含语句
+                new_content = content[:router_end + 1] + "\n" + include_line + content[router_end + 1:]
+                content = new_content
     
     # 写回文件
     with open(api_file, "w", encoding="utf-8") as f:

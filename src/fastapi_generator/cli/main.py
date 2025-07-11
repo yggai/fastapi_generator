@@ -1,61 +1,45 @@
 """
-FastAPI Generator CLI 主入口
+FastAPI Generator 命令行工具
 """
-import typer
-from typing import Optional
-from rich.console import Console
+import os
 import sys
 from pathlib import Path
-from fastapi_generator import __version__
+from typing import Optional
 
-# 初始化CLI应用
-app = typer.Typer(
-    name="fg",
-    help="FastAPI项目代码生成工具",
-    add_completion=False,
-)
+import typer
+from rich.console import Console
 
-# 初始化rich控制台对象
+from fastapi_generator.core.project_creator import create_project as create_project_func
+from fastapi_generator.generators.api_generator import generate_api as generate_api_func
+from fastapi_generator.generators.model_generator import generate_model as generate_model_func
+from fastapi_generator.generators.service_generator import generate_service as generate_service_func
+from fastapi_generator.generators.migration_generator import generate_migration as generate_migration_func
+
+app = typer.Typer(help="FastAPI Generator - 快速生成FastAPI项目和组件")
 console = Console()
-
-@app.callback()
-def callback(
-    version: Optional[bool] = typer.Option(
-        False, "--version", "-V", help="显示版本信息并退出"
-    )
-):
-    """
-    FastAPI Generator - 快速生成FastAPI项目代码
-    """
-    if version:
-        console.print(f"FastAPI Generator v{__version__}")
-        raise typer.Exit()
 
 @app.command("create")
 def create_project(
-    project_name: str = typer.Argument(..., help="项目名称"),
-    output_dir: Optional[Path] = typer.Option(
-        None, "--output", "-o", help="输出目录，默认为当前目录"
-    ),
-    template: str = typer.Option(
-        "standard", "--template", "-t", help="项目模板: basic, standard, enterprise"
-    ),
+    project_name: str,
+    output: Optional[Path] = typer.Option(None, "--output", "-o", help="输出目录，默认为当前目录"),
+    template: str = typer.Option("standard", "--template", "-t", help="项目模板: basic, standard, enterprise")
 ):
-    """
-    创建一个新的FastAPI项目
-    """
-    from fastapi_generator.core.project_creator import create_project as do_create
-    
-    console.print(f"[bold green]创建项目: {project_name}[/bold green]")
+    """创建一个新的FastAPI项目"""
+    # 显示创建信息
+    console.print(f"创建项目: {project_name}")
     console.print(f"模板: {template}")
     
+    # 设置默认输出目录为当前目录
+    output_dir = output or Path.cwd()
+    
     try:
-        project_path = do_create(
-            project_name=project_name, 
-            output_dir=output_dir, 
+        # 调用项目创建函数
+        project_path = create_project_func(
+            project_name=project_name,
+            output_dir=output_dir,
             template=template
         )
-        console.print(f"[bold green]✓ 项目创建成功![/bold green] 路径: {project_path}")
+        console.print(f"[bold green]项目创建成功![/bold green] 路径: \n{project_path}")
     except Exception as e:
         console.print(f"[bold red]错误: {str(e)}[/bold red]")
         raise typer.Exit(code=1)
@@ -64,59 +48,45 @@ def create_project(
 def generate_component(
     component_type: str = typer.Argument(..., help="组件类型: api, model, service, migration"),
     name: str = typer.Argument(..., help="组件名称"),
-    output_dir: Optional[Path] = typer.Option(
-        None, "--output", "-o", help="输出目录，默认为当前目录下对应的模块目录"
-    ),
+    output: Optional[Path] = typer.Option(None, "--output", "-o", help="输出目录，默认为当前目录")
 ):
-    """
-    生成项目组件(API、模型、服务、数据库迁移等)
-    """
-    console.print(f"[bold green]生成{component_type}: {name}[/bold green]")
+    """生成FastAPI项目组件"""
+    # 设置默认输出目录为当前目录
+    output_dir = output or Path.cwd()
     
     try:
         if component_type == "api":
-            from fastapi_generator.generators.api_generator import generate_api
-            generate_api(name=name, output_dir=output_dir)
+            console.print(f"生成API: {name}")
+            api_file = generate_api_func(name, output_dir)
+            console.print(f"[bold green]API生成成功![/bold green] 文件: \n{api_file}")
+            
         elif component_type == "model":
-            from fastapi_generator.generators.model_generator import generate_model
-            generate_model(name=name, output_dir=output_dir)
+            console.print(f"生成模型: {name}")
+            model_file = generate_model_func(name, output_dir)
+            console.print(f"[bold green]模型生成成功![/bold green] 文件: \n{model_file}")
+            
         elif component_type == "service":
-            from fastapi_generator.generators.service_generator import generate_service
-            generate_service(name=name, output_dir=output_dir)
+            console.print(f"生成服务: {name}")
+            service_file = generate_service_func(name, output_dir)
+            console.print(f"[bold green]服务生成成功![/bold green] 文件: \n{service_file}")
+            
         elif component_type == "migration":
-            from fastapi_generator.generators.migration_generator import generate_migration
-            generate_migration(output_dir=output_dir)
-            console.print(f"[bold green]✓ 数据库迁移配置生成成功![/bold green]")
-            return
+            console.print(f"生成数据库迁移")
+            migrations_dir = generate_migration_func(output_dir)
+            console.print(f"[bold green]数据库迁移生成成功![/bold green] 目录: \n{migrations_dir}")
+            
         else:
-            console.print(f"[bold red]错误: 未知的组件类型 '{component_type}'[/bold red]")
-            console.print("可用的组件类型: api, model, service, migration")
+            console.print(f"[bold red]错误: 不支持的组件类型 '{component_type}'[/bold red]")
+            console.print("支持的组件类型: api, model, service, migration")
             raise typer.Exit(code=1)
             
-        console.print(f"[bold green]✓ {component_type}生成成功![/bold green]")
     except Exception as e:
         console.print(f"[bold red]错误: {str(e)}[/bold red]")
         raise typer.Exit(code=1)
 
-@app.command("init-migration")
-def init_migration(
-    output_dir: Optional[Path] = typer.Option(
-        None, "--output", "-o", help="输出目录，默认为当前项目根目录"
-    ),
-):
-    """
-    初始化数据库迁移配置
-    """
-    from fastapi_generator.generators.migration_generator import generate_migration
-    
-    console.print("[bold green]初始化数据库迁移配置[/bold green]")
-    
-    try:
-        migrations_dir = generate_migration(output_dir=output_dir)
-        console.print(f"[bold green]✓ 数据库迁移配置初始化成功![/bold green] 路径: {migrations_dir}")
-    except Exception as e:
-        console.print(f"[bold red]错误: {str(e)}[/bold red]")
-        raise typer.Exit(code=1)
+def main():
+    """主函数入口"""
+    app()
 
 if __name__ == "__main__":
-    app() 
+    main() 

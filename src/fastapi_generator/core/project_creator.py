@@ -102,16 +102,8 @@ def _setup_migration(project_dir: Path, context: Dict[str, Any]) -> None:
         project_dir: 项目目录
         context: 模板渲染上下文
     """
-    try:
-        # 导入迁移生成器
-        from fastapi_generator.generators.migration_generator import generate_migration
-        
-        # 生成迁移配置
-        generate_migration(output_dir=project_dir)
-    except ImportError:
-        print("警告: 无法导入迁移生成器，跳过迁移配置")
-    except Exception as e:
-        print(f"警告: 创建迁移配置失败: {str(e)}")
+    # 这个方法现在留空，因为迁移配置已在模板中处理
+    pass
 
 def _create_project_structure(
     template_dir: Path, 

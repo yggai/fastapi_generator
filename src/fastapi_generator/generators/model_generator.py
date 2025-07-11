@@ -67,7 +67,7 @@ def generate_model(name: str, output_dir: Optional[Path] = None, fields: Optiona
     
     Args:
         name: 模型名称
-        output_dir: 输出目录，默认为当前项目的models目录
+        output_dir: 输出目录，默认为当前项目的app目录
         fields: 模型字段定义，默认为None（使用基本字段）
         
     Returns:
@@ -84,16 +84,26 @@ def generate_model(name: str, output_dir: Optional[Path] = None, fields: Optiona
         project_root = find_project_root()
         if project_root:
             # 假设标准项目结构
-            models_dir = project_root / "app" / "models"
-            schemas_dir = project_root / "app" / "schemas"
+            app_dir = project_root / "app"
+            models_dir = app_dir / "models"
+            schemas_dir = app_dir / "schemas"
         else:
-            # 如果找不到项目根目录，使用当前目录
-            models_dir = Path.cwd() / "app" / "models"
-            schemas_dir = Path.cwd() / "app" / "schemas"
+            # 如果找不到项目根目录，使用当前目录下的app目录
+            app_dir = Path.cwd() / "app"
+            models_dir = app_dir / "models"
+            schemas_dir = app_dir / "schemas"
     else:
-        # 如果提供了输出目录，假设它是项目根目录
-        models_dir = output_dir / "models"
-        schemas_dir = output_dir / "schemas"
+        # 如果提供了输出目录，检查是否有app目录
+        if (output_dir / "app").exists() and (output_dir / "app").is_dir():
+            # 如果存在app目录，使用app下的models和schemas目录
+            app_dir = output_dir / "app"
+            models_dir = app_dir / "models"
+            schemas_dir = app_dir / "schemas"
+        else:
+            # 否则，假设output_dir已经是app目录或直接使用output_dir
+            app_dir = output_dir
+            models_dir = app_dir / "models"
+            schemas_dir = app_dir / "schemas"
     
     # 确保输出目录存在
     ensure_dir_exists(models_dir)
@@ -135,33 +145,28 @@ def generate_model(name: str, output_dir: Optional[Path] = None, fields: Optiona
     
     return model_file
 
-def _update_init_file(directory: Path, model_name: str, model_class: str) -> None:
+def _update_init_file(dir_path: Path, model_name: str, model_class: str) -> None:
     """
     更新__init__.py文件，添加模型导入
-    
-    Args:
-        directory: 目录路径
-        model_name: 模型名称（蛇形命名法）
-        model_class: 模型类名（帕斯卡命名法）
     """
-    init_file = directory / "__init__.py"
-    
-    # 如果__init__.py不存在，创建一个
+    # 确保__init__.py文件存在
+    init_file = dir_path / "__init__.py"
     if not init_file.exists():
         with open(init_file, "w", encoding="utf-8") as f:
-            f.write('"""数据模型模块"""\n')
+            f.write(f"""\"\"\"数据模型模块\"\"\"\n""")
     
     # 读取现有内容
     with open(init_file, "r", encoding="utf-8") as f:
         content = f.read()
     
-    # 检查是否已经导入了该模型
-    import_pattern = rf"from .{model_name} import {model_class}"
-    if not re.search(import_pattern, content):
-        # 添加导入语句
-        if content.strip() and not content.endswith("\n"):
-            content += "\n"
-        content += f"from .{model_name} import {model_class}\n"
+    # 添加导入语句（如果不存在）
+    import_line = f"from .{model_name} import {model_class}\n"
+    if import_line not in content:
+        # 如果文件为空或只有文档字符串，添加新行
+        if not content.strip() or content.strip().endswith('"""'):
+            content += "\n" + import_line
+        else:
+            content += import_line
         
         # 写回文件
         with open(init_file, "w", encoding="utf-8") as f:
