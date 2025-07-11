@@ -9,6 +9,7 @@ from typing import Optional
 import typer
 from rich.console import Console
 
+from fastapi_generator import __version__
 from fastapi_generator.core.project_creator import create_project as create_project_func
 from fastapi_generator.generators.api_generator import generate_api as generate_api_func
 from fastapi_generator.generators.model_generator import generate_model as generate_model_func
@@ -17,6 +18,19 @@ from fastapi_generator.generators.migration_generator import generate_migration 
 
 app = typer.Typer(help="FastAPI Generator - 快速生成FastAPI项目和组件")
 console = Console()
+
+def version_callback(value: bool):
+    """版本回调函数"""
+    if value:
+        console.print(f"FastAPI Generator 版本: {__version__}")
+        raise typer.Exit()
+
+@app.callback()
+def main_callback(
+    version: bool = typer.Option(False, "--version", "-v", help="显示版本号", callback=version_callback)
+):
+    """FastAPI Generator CLI工具"""
+    pass
 
 @app.command("create")
 def create_project(
