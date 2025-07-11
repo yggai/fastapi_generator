@@ -92,7 +92,7 @@ target_metadata = Base.metadata
 # ... etc.
 
 def run_migrations_offline():
-    """Run migrations in 'offline' mode."""
+    # 在离线模式下运行迁移
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -105,7 +105,7 @@ def run_migrations_offline():
         context.run_migrations()
 
 def run_migrations_online():
-    """Run migrations in 'online' mode."""
+    # 在在线模式下运行迁移
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
