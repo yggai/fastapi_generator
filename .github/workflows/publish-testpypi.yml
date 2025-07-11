@@ -1,0 +1,37 @@
+name: 发布到TestPyPI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: 安装依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine wheel setuptools
+        
+    - name: 构建和检查包
+      run: |
+        python -m build
+        twine check dist/*
+        
+    - name: 发布到TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        repository-url: https://test.pypi.org/legacy/
+        skip-existing: true
+        
+    - name: 发布成功通知
+      run: |
+        echo "包已成功发布到TestPyPI！"
+        echo "安装命令: pip install --index-url https://test.pypi.org/simple/ fastapi-generator" 
